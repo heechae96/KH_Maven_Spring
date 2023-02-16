@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd">
+
+	<!-- <bean id = "customer" class="kr.iei.customer.domain.Customer">
+		<property name="id" value="khuser01"></property>
+		<property name="name" value="일용자"></property>
+		<property name="address" value="서울시 서초구"></property>
+		<property name="email">
+			<value>khuser01@iei.or.kr</value>
+		</property>
+	</bean> -->
+	
+	<bean id = "customer" class="kr.iei.customer.domain.Customer">
+		<constructor-arg value="khuser02"></constructor-arg>
+		<constructor-arg value="이용자"></constructor-arg>
+		<constructor-arg value="서울시 종로구"></constructor-arg>
+		<constructor-arg value="khuser02@iei.or.kr"></constructor-arg>
+	</bean>
+
+	<bean id="customerStore" class="kr.iei.customer.store.logic.CustomerStoreImpl"></bean>
+	<bean id="customerService" class="kr.iei.customer.service.logic.CustomerServiceImpl">
+		<!-- 1. setter메소드를 이용한 의존성 주입 -->
+		<!-- <property name="store" ref="customerStore"></property> -->
+		
+		<!-- 2. 생성자를 이용한 의존성 주입 -->
+		<constructor-arg ref="customerStore" />
+	</bean>
+		
+</beans>
