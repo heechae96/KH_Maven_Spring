@@ -15,6 +15,12 @@
 		<result property="mStatus" column="M_STATUS" />
 	</resultMap>
 	<select id="checkMeberLogin" resultMap="memberResultMap">
-		SELECT * FROM MEMBER_TBL WHERE MEMBER_ID = #{memberId } AND MEMBER_PW = #{memberPw }
+		SELECT MEMBER_ID, MEMBER_NAME FROM MEMBER_TBL WHERE MEMBER_ID = #{memberId } AND MEMBER_PW = #{memberPw }
+	</select>
+	<select id="selectMembers" resultMap="memberResultMap">
+		SELECT * FROM MEMBER_TBL
+	</select>
+	<select id="selectOneById" resultMap="memberResultMap">
+		SELECT * FROM MEMBER_TBL WHERE MEMBER_ID = #{memberId}
 	</select>
 </mapper>  
