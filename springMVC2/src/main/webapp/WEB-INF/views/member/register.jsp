@@ -8,7 +8,7 @@
 <title>회원 등록</title>
 </head>
 <body>
-	<c:if test="${sessionScope.loginUser ne null }">
+	<c:if test="${sessionScope.loginUser eq null }">
 		<h1>회원가입</h1>
 		<form action="/member/register.kh" method="post">
 			ID : <input type="text" name="memberId"><br>
