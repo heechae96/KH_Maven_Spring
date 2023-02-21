@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>마이페이지</title>
+<title>공지사항 작성</title>
 <style type="text/css">
 	body {
 			margin: 0;
@@ -49,9 +49,6 @@
 		font-size: x-large;
 	}
 	main {
-	    margin: 0 auto;
-	    width: 500px;
-	    height: 500px;
 	    display: flex;
 	    flex-direction: column;
 	    justify-content: center;
@@ -73,28 +70,17 @@
 		</div>
 	</header>
 	<main>
-		<form action="/member/modify.kh" method="post">
-			<label for="id">ID : </label><input type="text" name="memberId" value="${user.memberId }" readonly id="id"><br>
-			<label for="pw">PW : </label><input type="password" name="memberPw" value="${user.memberPw }" id="pw"><br>
-			<label for="name">NAME : </label><input type="text" name="memberName" value="${user.memberName }" readonly id="name"><br>
-			<label for="email">EMAIL : </label><input type="text" name="memberEmail" value="${user.memberEmail }" id="email"><br>
-			<label for="phone">PHONE : </label><input type="text" name="memberPhone" value="${user.memberPhone }" id="phone"><br>
-			<label for="addr">ADDRESS : </label><input type="text" name="memberAddr" value="${user.memberAddr }" id="addr"><br>
+		<h1>공지글 쓰기</h1>
+		<form action="/notice/write.kh" method="post" enctype="multipart/form-data">
+			<label for="title">제목 : </label><input type="text" id="title" name="noticeTitle"><br>
+			<label for="writer">작성자 : </label><input type="text" id="writer" name="noticeWriter"><br>
+			<label for="content">내용 : </label><textarea id="content" name="noticeContent"></textarea><br>
+			<label for="file">첨부파일 : </label><input type="file" id="file" name="uploadFile"><br>
 			<div>
-				<input type="submit" value="수정">
+				<input type="submit" value="완료">
 				<input type="reset" value="취소">
 			</div>
 		</form>
-		<a href="/member/delete.kh?memberId=${user.memberId }" onclick="return check()">회원탈퇴</a>
 	</main>
-	<script type="text/javascript">
-	function check() {
-		if(confirm("정말로 탈퇴하시겠습니까?")){
-			return true;
-		}else{
-			return false;
-		}
-	}
-	</script>
 </body>
 </html>

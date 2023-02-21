@@ -33,4 +33,10 @@ public class MemberStoreImpl implements MemberStore{
 		return result;
 	}
 
+	@Override
+	public int deleteMember(SqlSession session, String memberId) {
+		int result = session.delete("MemberMapper.deleteMember", memberId);
+		return result;
+	}
+
 }

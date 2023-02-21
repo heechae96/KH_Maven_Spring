@@ -23,5 +23,13 @@
 	<bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
 		<constructor-arg ref="sqlSession"></constructor-arg>
 	</bean>
+	
+	<!-- MultipartFile을 사용하기 위해 -->
+	<!-- 첨부파일 첨부할때 필요했음 -->
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<!-- 1억 -> 100MB -> .1GB -->
+		<property name="maxUploadSize" value="100000000"></property>
+		<property name="maxInMemorySize" value="100000000"></property>
+	</bean>
 		
 </beans>

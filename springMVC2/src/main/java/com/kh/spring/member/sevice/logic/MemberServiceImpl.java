@@ -40,4 +40,10 @@ public class MemberServiceImpl implements MemberService{
 		return result;
 	}
 
+	@Override
+	public int deleteMember(String memberId) {
+		int result = mStore.deleteMember(session, memberId);
+		return result;
+	}
+
 }

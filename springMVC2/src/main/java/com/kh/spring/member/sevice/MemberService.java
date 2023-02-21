@@ -30,9 +30,18 @@ public interface MemberService {
 
 	/**
 	 * 정보변경 Service
+	 * 
 	 * @param member
 	 * @return int
 	 */
 	public int modifyInfo(Member member);
+
+	/**
+	 * 회원탈퇴 Service
+	 * 
+	 * @param memberId
+	 * @return int
+	 */
+	public int deleteMember(String memberId);
 
 }

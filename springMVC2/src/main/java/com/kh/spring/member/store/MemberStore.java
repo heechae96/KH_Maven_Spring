@@ -35,10 +35,20 @@ public interface MemberStore {
 
 	/**
 	 * 정보변경 Store
+	 * 
 	 * @param session
 	 * @param member
 	 * @return int
 	 */
 	public int modifyInfo(SqlSession session, Member member);
+
+	/**
+	 * 회원탈퇴 Store
+	 * 
+	 * @param session
+	 * @param memberId
+	 * @return int
+	 */
+	public int deleteMember(SqlSession session, String memberId);
 
 }

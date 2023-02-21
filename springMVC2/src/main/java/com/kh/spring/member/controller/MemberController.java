@@ -96,7 +96,8 @@ public class MemberController {
 				return "common/error";
 			}
 		} catch (Exception e) {
-			model.addAttribute("msg", "마이페이지로 가기 실패");
+			e.printStackTrace();
+			model.addAttribute("msg", e.getMessage());
 			return "common/error";
 		}
 
@@ -119,7 +120,30 @@ public class MemberController {
 			model.addAttribute("msg", e.getMessage());
 			return "common/error";
 		}
-
+		
+	}
+	
+	// 회원탈퇴
+	@RequestMapping(value = "/member/delete.kh", method = RequestMethod.GET)
+	public String deleteMember(HttpServletRequest req, String memberId, Model model) {
+		try {
+			// @RequestParam("memberID) String memberId
+			// String id = req.getParameter("memberId");
+			int result = mService.deleteMember(memberId);
+			if (result > 0) {
+				// 세션 반환 필요
+				// 로그아웃에 구현되어 있음
+				// -> 세션 반환하면서 redirect:/ 되어짐
+				return "redirect:/member/logout.kh";
+			} else {
+				model.addAttribute("msg", "회원탈퇴 실패");
+				return "common/error";
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			model.addAttribute("msg", e.getMessage());
+			return "common/error";
+		}
 	}
 
 }
