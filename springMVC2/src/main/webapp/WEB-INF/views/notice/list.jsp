@@ -46,9 +46,7 @@
 	}
 	a {
 		font-size: large;
-		display: block;
 		margin-right: 15px;
-		margin-bottom: 5px;
 		color: purple;
 	}
 	a:visited, a:link {
@@ -91,6 +89,7 @@
 					<th>작성자</th>
 					<th>작성일</th>
 					<th>첨부파일</th>
+					<th>수정</th>
 				</tr>
 			</thead>
 			<c:forEach items="${list }" var="notice" varStatus="status">
@@ -104,6 +103,12 @@
 						<c:if test="${empty notice.noticeFileName }">X</c:if>
 						<c:if test="${!empty notice.noticeFileName }">O</c:if>
 					</td>
+					<td>
+						<c:url var="nModify" value="/notice/modify.kh">
+							<c:param name="noticeNo" value="${notice.noticeNo }"/>
+						</c:url>
+						<a href="${nModify }">선택</a>
+					</td>
 				</tr>
 			</tbody>
 			</c:forEach>
@@ -111,6 +116,24 @@
 				<tr>
 					<td colspan="5">
 						<input type="text" placeholder="검색어를 입력하세요">
+					</td>
+					<td>버튼자리</td>
+				</tr>
+				<tr>
+					<td colspan="6" style="text-align: center">
+						<c:forEach begin="${pi.startNavi }" end="${pi.endNavi }" var="p">
+							<c:url var="pageUrl" value="/notice/list.kh">
+								<c:param name="page" value="${p }"></c:param>
+							</c:url>
+							<a href="${pageUrl }">
+								<c:if test="${p eq pi.currentPage }"><b>${p }</b></c:if>
+								<c:if test="${p ne pi.currentPage }">${p }</c:if>
+							</a>
+							<%-- <a href="/notice/list.kh?page=${p }">
+								<c:if test="${p eq pi.currentPage }"><b>${p }</b></c:if>
+								<c:if test="${p ne pi.currentPage }">${p }</c:if>
+							</a> --%>
+						</c:forEach>
 					</td>
 				</tr>
 			</tfoot>

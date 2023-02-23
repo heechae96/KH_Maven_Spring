@@ -3,6 +3,7 @@ package com.kh.spring.notice.service;
 import java.util.List;
 
 import com.kh.spring.notice.domain.Notice;
+import com.kh.spring.notice.domain.PageInfo;
 
 public interface NoticeService {
 
@@ -17,9 +18,10 @@ public interface NoticeService {
 	/**
 	 * 공지사항 조회 Service
 	 * 
+	 * @param pi
 	 * @return List<Notice>
 	 */
-	public List<Notice> selectNoticeList();
+	public List<Notice> selectNoticeList(PageInfo pi);
 
 	/**
 	 * 공지사항 상세조회 Service
@@ -36,5 +38,20 @@ public interface NoticeService {
 	 * @return int
 	 */
 	public int noticeRemove(int noticeNo);
+
+	/**
+	 * 공지사항 갯수 조회 Service
+	 * 
+	 * @return int
+	 */
+	public int getListCnt();
+
+	/**
+	 * 공지사항 수정 Service
+	 * 
+	 * @param notice
+	 * @return int
+	 */
+	public int updateNotice(Notice notice);
 
 }

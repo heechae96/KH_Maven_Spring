@@ -81,6 +81,7 @@
 			<div class="d-grid gap-2">
 				<button type="submit" class="btn btn-primary">완료</button>
 				<button type="reset" class="btn btn-danger">취소</button>
+				<button type="button" class="btn btn-success" onclick="goEnroll()">회원가입</button>
 			</div>
 		</form>
 	</c:if>
