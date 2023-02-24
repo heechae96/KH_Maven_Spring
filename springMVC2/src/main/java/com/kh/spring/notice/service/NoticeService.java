@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.kh.spring.notice.domain.Notice;
 import com.kh.spring.notice.domain.PageInfo;
+import com.kh.spring.notice.domain.Search;
 
 public interface NoticeService {
 
@@ -45,6 +46,13 @@ public interface NoticeService {
 	 * @return int
 	 */
 	public int getListCnt();
+	
+	/**
+	 * 키워드를 포함한 공지사항 갯수 Service
+	 * @param search
+	 * @return int
+	 */
+	public int getListCnt(Search search);
 
 	/**
 	 * 공지사항 수정 Service
@@ -53,5 +61,14 @@ public interface NoticeService {
 	 * @return int
 	 */
 	public int updateNotice(Notice notice);
+
+	/**
+	 * 공지 사항 검색 Service
+	 * @param pi 
+	 * 
+	 * @param search
+	 * @return List<Notice>
+	 */
+	public List<Notice> selectListByKeyword(PageInfo pi, Search search);
 
 }

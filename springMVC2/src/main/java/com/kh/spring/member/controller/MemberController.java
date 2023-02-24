@@ -145,5 +145,14 @@ public class MemberController {
 			return "common/error";
 		}
 	}
+	
+	// /member/list.kh
+	public String showMembers() {
+		// 1. 페이징 없이 출력
+		// 2. 페이징 처리해서 출력
+		// 3. 검색해서 출력
+		// 4. 검색하고 페이징 처리 출력
+		return null;
+	}
 
 }

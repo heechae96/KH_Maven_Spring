@@ -92,7 +92,6 @@
 					<th>작성일</th>
 					<th>내용</th>
 					<th>첨부파일</th>
-					<th>수정</th>
 					<th>삭제</th>
 				</tr>
 			</thead>
@@ -104,7 +103,6 @@
 					<td>${notice.nCreateDate }</td>
 					<td>${notice.noticeContent }</td>
 					<td>${notice.noticeFileName }</td>
-					<td><a href="#">선택</a></td>
 					<td><a href="/notice/remove.kh?noticeNo=${notice.noticeNo }" onclick="return check()">선택</a></td>
 				</tr>
 			</tbody>

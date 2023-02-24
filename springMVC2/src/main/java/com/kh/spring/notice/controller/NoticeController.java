@@ -16,6 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.kh.spring.notice.domain.Notice;
 import com.kh.spring.notice.domain.PageInfo;
+import com.kh.spring.notice.domain.Search;
 import com.kh.spring.notice.service.NoticeService;
 
 @Controller
@@ -162,7 +163,7 @@ public class NoticeController {
 				model.addAttribute("notice", notice);
 				return "notice/modify";
 			} else {
-				model.addAttribute("msg", "데이터 조회 실패");
+				model.addAttribute("msg", "공지사항 조회 실패");
 				return "common/error";
 			}
 		} catch (Exception e) {
@@ -199,7 +200,7 @@ public class NoticeController {
 			if (result > 0) {
 				return "redirect:/notice/detail.kh?noticeNo=" + notice.getNoticeNo();
 			} else {
-				model.addAttribute("msg", "데이터 수정 실패");
+				model.addAttribute("msg", "공지사항 수정 실패");
 				return "common/error";
 			}
 		} catch (Exception e) {
@@ -218,5 +219,36 @@ public class NoticeController {
 		if (delFile.exists()) {
 			delFile.delete();
 		}
+	}
+
+	// 공지사항 검색
+	@RequestMapping("/notice/search.kh")
+	public String noticeSearch(
+			// @RequestParam("searchValue") String keyword,
+			// @RequestParam(value = "searchCondition") String condition, 
+			@ModelAttribute Search search,
+			@RequestParam(value = "page", required = false, defaultValue = "1") int currentPage,
+			Model model) {
+		try {
+			System.out.println("테스트: " + search);
+			int totalCnt = nService.getListCnt(search);
+			PageInfo pi = this.getPageInfo(currentPage, totalCnt);
+			List<Notice> searchList = nService.selectListByKeyword(pi, search);
+//			if (searchList != null) {	// null은 지금 정상작동 X. else로 가지 않는다
+			if (!searchList.isEmpty()) {
+				model.addAttribute("pi", pi);
+				model.addAttribute("search", search);
+				model.addAttribute("sList", searchList);
+				return "notice/search";
+			} else {
+				model.addAttribute("msg", "공지사항 검색 실패");
+				return "common/error";
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			model.addAttribute("msg", e.getMessage());
+			return "common/error";
+		}
+
 	}
 }

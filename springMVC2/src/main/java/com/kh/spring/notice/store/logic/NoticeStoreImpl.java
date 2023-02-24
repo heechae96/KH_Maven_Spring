@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.spring.notice.domain.Notice;
 import com.kh.spring.notice.domain.PageInfo;
+import com.kh.spring.notice.domain.Search;
 import com.kh.spring.notice.store.NoticeStore;
 
 @Repository
@@ -53,11 +54,27 @@ public class NoticeStoreImpl implements NoticeStore {
 		int result = session.selectOne("NoticeMapper.getListCnt");
 		return result;
 	}
+	
+	@Override
+	public int getListCnt(SqlSession session, Search search) {
+		int result = session.selectOne("NoticeMapper.getListKeywordCnt", search);
+		return result;
+	}
 
 	@Override
 	public int updateNotice(SqlSession session, Notice notice) {
 		int result = session.update("NoticeMapper.updateNotice", notice);
 		return result;
+	}
+
+	@Override
+	public List<Notice> selectListByKeyword(SqlSession session, PageInfo pi, Search search) {
+		int limit = pi.getBoardLimit();
+		int currentPage = pi.getCurrentPage();
+		int offset = (currentPage - 1) * limit;
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		List<Notice> list = session.selectList("NoticeMapper.selectListByKeyword", search, rowBounds);
+		return list;
 	}
 
 }

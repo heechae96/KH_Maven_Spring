@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.kh.spring.notice.domain.Notice;
 import com.kh.spring.notice.domain.PageInfo;
+import com.kh.spring.notice.domain.Search;
 import com.kh.spring.notice.service.NoticeService;
 import com.kh.spring.notice.store.NoticeStore;
 
@@ -47,11 +48,23 @@ public class NoticeServiceImpl implements NoticeService {
 		int result = nStore.getListCnt(session);
 		return result;
 	}
+	
+	@Override
+	public int getListCnt(Search search) {
+		int result = nStore.getListCnt(session, search);
+		return result;
+	}
 
 	@Override
 	public int updateNotice(Notice notice) {
 		int result = nStore.updateNotice(session, notice);
 		return result;
+	}
+
+	@Override
+	public List<Notice> selectListByKeyword(PageInfo pi, Search search) {
+		List<Notice> list = nStore.selectListByKeyword(session, pi, search);
+		return list;
 	}
 
 }
