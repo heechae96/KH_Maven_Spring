@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.spring.member.domain.Member;
 import com.kh.spring.member.sevice.MemberService;
@@ -50,23 +51,23 @@ public class MemberController {
 
 	// 로그인
 	@RequestMapping(value = "/member/login.kh", method = RequestMethod.POST)
-	public String login(HttpServletRequest req, @ModelAttribute Member member, String memberId, String memberPw,
-			Model model) {
+	public ModelAndView login(HttpServletRequest req, @ModelAttribute Member member, String memberId, String memberPw,
+			ModelAndView mv) {
 		try {
 			Member mOne = mService.login(member);
 			if (mOne != null) {
 				HttpSession session = req.getSession();
 				session.setAttribute("loginUser", mOne);
-				return "redirect:/";
+				mv.setViewName("redirect:/");
 			} else {
-				model.addAttribute("msg", "로그인 실패");
-				return "common/error";
+				mv.addObject("msg", "로그인 실패");
+				mv.setViewName("common/error");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			model.addAttribute("msg", e.getMessage());
-			return "common/error";
+			mv.addObject("msg", e.getMessage()).setViewName("common/error");
 		}
+		return mv;
 	}
 
 	// 로그아웃
